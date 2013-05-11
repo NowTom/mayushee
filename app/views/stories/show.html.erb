@@ -15,17 +15,19 @@
       <div class="span12">
         <h2>Tasks</h2>
         <p><%= link_to 'Add Task', new_story_task_path(@story), class: 'btn' %></p>
-        <table class="table table-striped table-bordered">
-          <% @story.tasks.each do |task| %>
-            <tr>
-              <td><%= link_to task.name, task %></td>
-              <td><%= "#{task.hours_left}h left" %></td>
-              <td>
-                <%= link_to 'Edit', '#' %> |
-                <%= link_to 'Delete', '#' %>
-              </td>
-            </tr>
-          <% end %>
+        <table class="table table-bordered table-hover">
+          <tbody>
+            <% @story.tasks.each do |task| %>
+              <tr>
+                <td><%= link_to task.name, task %></td>
+                <td><%= "#{task.original_estimation}h left" %></td>
+                <td>
+                  <%= link_to 'Edit', edit_task_path(task) %> |
+                  <%= link_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
         </table>
       </div>
     </div>
